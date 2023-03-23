@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_lopes/homepage/home.dart';
+import 'package:flutter_app_lopes/pages/home.dart';
+import 'package:flutter_app_lopes/pages/profile.dart';
 
 class NavigationDrawer  extends StatelessWidget {
   const NavigationDrawer({super.key});
@@ -27,7 +28,13 @@ class NavigationDrawer  extends StatelessWidget {
       ListTile(
         leading: const Icon(Icons.person_outline),
         title: const Text("Profile"),
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ProfilePage()),
+          );
+        },
       ),
       ListTile(
         leading: const Icon(Icons.shuffle),
