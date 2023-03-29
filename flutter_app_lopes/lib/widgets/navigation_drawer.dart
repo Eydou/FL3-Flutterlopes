@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_lopes/pages/home.dart';
 import 'package:flutter_app_lopes/pages/profile.dart';
 
-class NavigationDrawer  extends StatelessWidget {
-  const NavigationDrawer({super.key});
+class NavigationDrawerLopes  extends StatelessWidget {
+  const NavigationDrawerLopes({super.key});
 
   @override
   Widget build(BuildContext context) => Drawer(

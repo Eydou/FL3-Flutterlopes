@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "609189001873",
+    "project_id": "firelopes-e1fe1",
+    "storage_bucket": "firelopes-e1fe1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:609189001873:android:fd34074f7a10dc480add30",
+        "android_client_info": {
+          "package_name": "com.example.flutter_app_lopes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "609189001873-msqe22ecdpj0r2sm2lgi5hfs43r3iorj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjgnNj4HFf4d_9GNRt2H_kWbaVyBgW3Qk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "609189001873-ditvesofeguvg23a1n36ia0uua1bpffr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

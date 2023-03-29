@@ -43,6 +43,6 @@ class HomePage extends StatelessWidget {
           ],
         ),
         backgroundColor: Color.fromRGBO(245, 245, 245, 1.0),
-        drawer: const NavigationDrawer(),
+        drawer: const NavigationDrawerLopes(),
       );
 }
