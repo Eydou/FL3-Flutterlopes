@@ -1,6 +1,7 @@
 import 'package:flutter_app_lopes/bloc/authBloc.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_lopes/pages/home.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignIn extends StatefulWidget {
@@ -32,14 +33,15 @@ class _SignInState extends State<SignIn> {
         listener: (context, state) {
           if (state is Authenticated) {
             // Navigating to the dashboard screen if the user is authenticated
-            //Navigator.pushReplacement(context,
-                //MaterialPageRoute(builder: (context) => const Dashboard()));
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => HomePage()));
           }
           if (state is AuthError) {
             // Showing the error message if the user has entered invalid credentials
             ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: Text(state.error)));
           }
+
         },
         child: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {

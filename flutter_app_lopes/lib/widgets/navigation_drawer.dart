@@ -1,6 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_lopes/bloc/authBloc.dart';
 import 'package:flutter_app_lopes/pages/home.dart';
 import 'package:flutter_app_lopes/pages/profile.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../pages/signIn.dart';
 
 class NavigationDrawerLopes  extends StatelessWidget {
   const NavigationDrawerLopes({super.key});
@@ -44,7 +49,12 @@ class NavigationDrawerLopes  extends StatelessWidget {
       ListTile(
         leading: const Icon(Icons.shuffle),
         title: const Text("Logout"),
-        onTap: () {},
+        onTap: () {
+          BlocProvider.of<AuthBloc>(context).add(
+          SignOutRequested());
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => SignIn()));
+        },
       )
     ],
   );
