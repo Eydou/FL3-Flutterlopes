@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_lopes/pages/createRecipe.dart';
+
+import '../class/recipe.dart';
 
 extension StringCasingExtension on String {
   String toCapitalized() => length > 0 ?'${this[0].toUpperCase()}${substring(1).toLowerCase()}':'';
@@ -15,6 +19,7 @@ class _ProfilePageState extends State<ProfilePage> {
   final _firebaseAuth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
+    Stream<List<Recipe>> readRecipes() => FirebaseFirestore.instance.collection("recipes").snapshots().map((snapshot) => snapshot.docs.map((e) => Recipe.fromJson(e.data())).toList());
     return Scaffold(
       backgroundColor: Color.fromRGBO(245, 245, 245, 1.0),
       appBar: AppBar(
@@ -22,44 +27,65 @@ class _ProfilePageState extends State<ProfilePage> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(40, 0, 0, 0),
-            child: ProfilePicture(_firebaseAuth.currentUser!.email),
-          ),
-          InformationProfile(context),
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(20, 40, 20, 40),
-            child: Container(
-              color: Colors.redAccent,
-              height: 350,
-            ),
-          ),
-          SizedBox(
-              height: 40,
-              width: 250,
-              child: TextButton(
-                child: Text(
-                  'Create recipe',
-                  style: TextStyle(fontSize: 20),
+      body: StreamBuilder<List<Recipe>>(stream: readRecipes(), builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final recipe = snapshot.data!;
+          return Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(40, 0, 0, 0),
+                child: ProfilePicture(_firebaseAuth.currentUser!.email),
+              ),
+              InformationProfile(context),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(20, 40, 20, 40),
+                child: Container(
+                  color: Colors.redAccent,
+                  height: 350,
+                  child: ListView(
+                    children: recipe.map(buildRecipe).toList(),
+                  ),
                 ),
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.redAccent,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(30))),
-                ),
-                onPressed: () {
-                  print('Pressed');
-                },
-              ))
-        ],
-      ),
+              ),
+              SizedBox(
+                  height: 40,
+                  width: 250,
+                  child: TextButton(
+                    child: Text(
+                      'Create recipe',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.redAccent,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(30))),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => CreateRecipe()),
+                      );
+                    },
+                  ))
+            ],
+          );
+        } if(snapshot.hasError) {
+          return Text("${snapshot.error}");
+        }
+
+        else {
+          return Center(child: CircularProgressIndicator());
+        }
+      })
     );
   }
+
+  Widget buildRecipe(Recipe recipe) =>  ListTile(
+    title: Text(recipe.name)
+  );
 }
 
 Row ProfilePicture(String? name) {
