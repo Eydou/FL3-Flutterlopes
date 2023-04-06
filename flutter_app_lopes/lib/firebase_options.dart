@@ -51,6 +51,7 @@ class DefaultFirebaseOptions {
     authDomain: 'firelopes-e1fe1.firebaseapp.com',
     storageBucket: 'firelopes-e1fe1.appspot.com',
     measurementId: 'G-NJ4Z3520ND',
+    databaseURL: 'firelopes-e1fe1.firebaseio.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -59,6 +60,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '609189001873',
     projectId: 'firelopes-e1fe1',
     storageBucket: 'firelopes-e1fe1.appspot.com',
+    databaseURL: 'firelopes-e1fe1.firebaseio.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -69,6 +71,7 @@ class DefaultFirebaseOptions {
     storageBucket: 'firelopes-e1fe1.appspot.com',
     iosClientId: '609189001873-fvmn3cq2qm931137e5t2631jb1ri9nc8.apps.googleusercontent.com',
     iosBundleId: 'com.example.flutterAppLopes',
+    databaseURL: 'firelopes-e1fe1.firebaseio.com',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -79,5 +82,6 @@ class DefaultFirebaseOptions {
     storageBucket: 'firelopes-e1fe1.appspot.com',
     iosClientId: '609189001873-fvmn3cq2qm931137e5t2631jb1ri9nc8.apps.googleusercontent.com',
     iosBundleId: 'com.example.flutterAppLopes',
+    databaseURL: 'firelopes-e1fe1.firebaseio.com',
   );
 }

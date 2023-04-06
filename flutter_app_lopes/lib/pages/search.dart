@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_lopes/model/recipe.dart';
+import 'package:flutter_app_lopes/widgets/recipeSearch.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
 class Search extends StatefulWidget {
@@ -11,11 +12,12 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   final FloatingSearchBarController controller = FloatingSearchBarController();
+  String query = '';
 
   @override
   Widget build(BuildContext context) {
     final isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
-    final recipesRef = FirebaseFirestore.instance.collection('recipes')
+    Query<Recipe> recipesRef = FirebaseFirestore.instance.collection('recipes')
                         .withConverter<Recipe>(
                           fromFirestore: (snapshots, _) => Recipe.fromJson(snapshots.data()!),
                           toFirestore: (recipe, _) => recipe.toJson(),
@@ -26,10 +28,23 @@ class _SearchState extends State<Search> {
       elevation: 0,
       title: Text("Search our recipes", style: TextStyle(color: Colors.black)),
     ),
-        body: Center(child: StreamBuilder<QuerySnapshot<Recipe>>(
+        body: StreamBuilder<QuerySnapshot<Recipe>>(
           stream: recipesRef.snapshots(),
           builder: (context, snapshot) {
-            print(snapshot.requireData.docs[0]);
+
+            if (!snapshot.hasData) {
+              return Center(
+                child: Text("Loading..."),
+              );
+            }
+            if (snapshot.hasError) {
+              return Center(
+                child: Text(snapshot.error.toString()),
+              );
+            }
+
+            final List<QueryDocumentSnapshot<Recipe>> ?recipes = snapshot.data?.docs.toList();
+
             return FloatingSearchBar(
               hint: 'Search recipes',
               controller: controller,
@@ -41,7 +56,11 @@ class _SearchState extends State<Search> {
               openAxisAlignment: 0.0,
               width: isPortrait ? 600 : 500,
               debounceDelay: const Duration(milliseconds: 500),
-              //onQueryChanged: model.onQueryChanged,
+              onQueryChanged: (newQuery) {
+                setState(() {
+                  query = newQuery;
+                });
+              },
               transition: CircularFloatingSearchBarTransition(),
               progress: !snapshot.hasData,
               actions: [
@@ -61,13 +80,12 @@ class _SearchState extends State<Search> {
                     color: Colors.white,
                     child: ListView(
                       shrinkWrap: true,
-                      //children: List {("yo")},
+                      children: recipeSearchfromList(recipes, query),
                     )
                 );
               },
             );
           }),
-        ),
     );
   }
 }
