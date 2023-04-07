@@ -1,6 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_app_lopes/model/recipe.dart';
+import 'package:flutter_app_lopes/class//recipe.dart';
 
 class RecipeRepo {
 

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../model/recipe.dart';
+import '../class/recipe.dart';
 
 
 List<Widget> recipeSearchfromList(List<QueryDocumentSnapshot<Recipe>> ?recipes, String search) {
