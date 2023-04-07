@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_lopes/model/recipe.dart';
+import 'package:flutter_app_lopes/widgets/navigation_drawer.dart';
 import 'package:flutter_app_lopes/widgets/recipeSearch.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
@@ -26,8 +27,9 @@ class _SearchState extends State<Search> {
     return Scaffold(appBar: AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
-      title: Text("Search our recipes", style: TextStyle(color: Colors.black)),
+      title: Center(child: Text("Search our recipes", style: TextStyle(color: Colors.black))),
     ),
+        drawer: const NavigationDrawerLopes(),
         body: StreamBuilder<QuerySnapshot<Recipe>>(
           stream: recipesRef.snapshots(),
           builder: (context, snapshot) {

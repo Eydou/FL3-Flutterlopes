@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_lopes/bloc/authBloc.dart';
 import 'package:flutter_app_lopes/pages/home.dart';
 import 'package:flutter_app_lopes/pages/profile.dart';
+import 'package:flutter_app_lopes/pages/search.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../pages/signIn.dart';
@@ -45,6 +46,14 @@ class NavigationDrawerLopes  extends StatelessWidget {
         leading: const Icon(Icons.shuffle),
         title: const Text("Setting"),
         onTap: () {},
+      ),
+      ListTile(
+        leading: const Icon(Icons.search),
+        title: const Text("Search"),
+        onTap: () {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => Search()));
+        },
       ),
       ListTile(
         leading: const Icon(Icons.shuffle),
