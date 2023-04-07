@@ -208,6 +208,10 @@ class _CreateRecipeState extends State<CreateRecipe> {
                   try {
                     await referenceImageToUpload.putFile(File(file!.path));
                     imageUrl = await referenceImageToUpload.getDownloadURL();
+                    setState(() {
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text('Image uploaded')));
+                    });
                   } catch (error) {
                   }
                 },
