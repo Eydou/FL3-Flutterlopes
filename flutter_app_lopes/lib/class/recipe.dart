@@ -12,6 +12,7 @@ class Recipe {
   String? userId = "";
   final List<Ingredient> ingredients;
   final List<String> steps;
+  final String image;
 
   Recipe({
     required this.name,
@@ -21,6 +22,7 @@ class Recipe {
     this.userId,
     required this.ingredients,
     required this.steps,
+    required this.image
   });
 
 
@@ -32,6 +34,7 @@ class Recipe {
     userId: json["userId"],
     ingredients: List<Ingredient>.from(json["ingredients"].map((x) => Ingredient.fromJson(x))),
     steps: List<String>.from(json["steps"].map((x) => x)),
+    image: json["image"]
   );
 
   Map<String, dynamic> toJson() => {
@@ -42,6 +45,7 @@ class Recipe {
     "userId": userId,
     "ingredients": List<dynamic>.from(ingredients.map((x) => x.toJson())),
     "steps": List<dynamic>.from(steps.map((x) => x)),
+    "image": image
   };
 }
 

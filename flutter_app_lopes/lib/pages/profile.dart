@@ -40,7 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ClipRRect(
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
                   child: Image.network(
-                      "https://res.cloudinary.com/hv9ssmzrz/image/fetch/c_fill,f_auto,h_600,q_auto,w_800/https://s3-eu-west-1.amazonaws.com/images-ca-1-0-1-eu/tag_photos/original/2426/plat_principal_flickr_2304576748_f79c906b85_b.jpg",
+                    "${recipe.image}",
                       height: 100,
                       width: double.infinity,
                       fit: BoxFit.cover),

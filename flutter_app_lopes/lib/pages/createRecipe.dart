@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../class/recipe.dart';
 
@@ -11,6 +16,7 @@ class CreateRecipe extends StatefulWidget {
 }
 
 class _CreateRecipeState extends State<CreateRecipe> {
+  String imageUrl = '';
   var name = <TextEditingController>[];
   var quantity = <TextEditingController>[];
   var types = <TextEditingController>[];
@@ -88,7 +94,12 @@ class _CreateRecipeState extends State<CreateRecipe> {
             ),
             child: Text('Create recipe'),
             onPressed: () {
+              if (imageUrl.isEmpty) {
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(SnackBar(content: Text('Please upload an image')));
 
+                return;
+              }
               final nameRecipes = controller.text;
               List<String> stepString = [];
               steps.forEach((element) {
@@ -97,8 +108,7 @@ class _CreateRecipeState extends State<CreateRecipe> {
               for (int i = 0; i != name.length; i++) {
                 listIngredient.add(Ingredient(name: name[i].text, quantity: int.parse(quantity[i].text), type: types[i].text));
               }
-              createName(name: nameRecipes, people: int.parse(controllerPeople.text), time: int.parse(controllerTimes.text), steps: stepString, ingredient: listIngredient).then((value) => Navigator.pop(context));
-              print("IISISISISI ${controllerTimes.text}");
+              createName(name: nameRecipes, people: int.parse(controllerPeople.text), time: int.parse(controllerTimes.text), steps: stepString, ingredient: listIngredient, image: imageUrl).then((value) => Navigator.pop(context));
             },
           ),
         ),
@@ -179,6 +189,29 @@ class _CreateRecipeState extends State<CreateRecipe> {
                     onPressed: () => setState(() => cardStep.add(createCardStep())),
                   ),
                 ),
+                IconButton(onPressed: () async {
+                  ImagePicker imagePicker = ImagePicker();
+                  XFile? file =
+                  await imagePicker.pickImage(source: ImageSource.camera);
+                  print('${file?.path}');
+                  if (file == null) return;
+
+                  String uniqueFileName =
+                  DateTime.now().millisecondsSinceEpoch.toString();
+                  Reference referenceRoot = FirebaseStorage.instance.ref();
+                  Reference referenceDirImages =
+                  referenceRoot.child('images');
+
+                  Reference referenceImageToUpload =
+                  referenceDirImages.child(uniqueFileName);
+
+                  try {
+                    await referenceImageToUpload.putFile(File(file!.path));
+                    imageUrl = await referenceImageToUpload.getDownloadURL();
+                  } catch (error) {
+                  }
+                },
+                    icon: Icon(imageUrl.isEmpty ? Icons.camera_alt : Icons.vertical_align_bottom))
               ],
             )));
   }
@@ -205,7 +238,7 @@ class _CreateRecipeState extends State<CreateRecipe> {
   }
 }
 
-Future createName({required String name,required int time, required int people, required List<Ingredient> ingredient, required List<String> steps}) async {
+Future createName({required String name,required int time, required int people, required List<Ingredient> ingredient, required List<String> steps, required String image}) async {
 
   final _firebaseAuth = FirebaseAuth.instance;
   final docName = FirebaseFirestore.instance.collection("recipes").doc();
@@ -217,7 +250,9 @@ Future createName({required String name,required int time, required int people, 
       id: docName.id,
       name: name,
       steps: steps,
-      ingredients: ingredient);
+      ingredients: ingredient,
+    image: image
+  );
   final json = recipe.toJson();
 
   await docName.set(json);
