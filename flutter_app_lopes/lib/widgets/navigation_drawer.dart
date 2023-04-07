@@ -43,11 +43,6 @@ class NavigationDrawerLopes  extends StatelessWidget {
         },
       ),
       ListTile(
-        leading: const Icon(Icons.shuffle),
-        title: const Text("Setting"),
-        onTap: () {},
-      ),
-      ListTile(
         leading: const Icon(Icons.search),
         title: const Text("Search"),
         onTap: () {
