@@ -39,12 +39,15 @@ dependencies:
   flutter_bloc: ^8.1.2
   firebase_core: ^2.8.0
   firebase_auth: ^4.3.0
+  firebase_database: ^10.1.0
+  cloud_firestore: ^4.5.0
   equatable: ^2.0.3
   google_sign_in: ^6.0.2
   email_validator: ^2.0.1
-  cloud_firestore: ^4.5.0
   image_picker: ^0.8.6
   firebase_storage: ^11.1.0
+  material_floating_search_bar: ^0.3.7
+
 
 dev_dependencies:
   flutter_test:

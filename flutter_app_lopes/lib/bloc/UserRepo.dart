@@ -45,7 +45,7 @@ class UserRepository {
 
   Future<void> signInWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAccount? googleUser = await GoogleSignIn(clientId: "609189001873-msqe22ecdpj0r2sm2lgi5hfs43r3iorj.apps.googleusercontent.com").signIn();
 
       final GoogleSignInAuthentication? googleAuth =
       await googleUser?.authentication;
