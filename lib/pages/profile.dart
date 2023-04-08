@@ -137,7 +137,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Expanded(
                 child: GridView.count(
                     crossAxisCount: 2,
-                    childAspectRatio: 3/5,
+                    childAspectRatio: 8/12,
                     scrollDirection: Axis.vertical,
                     physics: PageScrollPhysics(),
                     shrinkWrap: true,
