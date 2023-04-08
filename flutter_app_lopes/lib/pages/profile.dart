@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_lopes/class/user.dart' as AppUser;
 import 'package:flutter_app_lopes/pages/createRecipe.dart';
 import 'package:flutter_app_lopes/pages/recipe.dart';
 import 'package:flutter_app_lopes/pages/uploadImage.dart';
@@ -145,28 +146,39 @@ class _ProfilePageState extends State<ProfilePage> {
                       return buildRowItemsGrid(context, filteredRecipes[index], index);
                     })),
               ),
-              SizedBox(
-                  height: 40,
-                  width: 250,
-                  child: TextButton(
-                    child: Text(
-                      'Create recipe',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    style: TextButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.redAccent,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(30))),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => CreateRecipe()),
-                      );
-                    },
-                  )),
+              StreamBuilder<AppUser.User?>(
+                stream: AppUser.UserStream().stream,
+                builder: (context, snapshot) {
+
+                  if (snapshot.hasData && snapshot.data!.role == 'admin') {
+                      return SizedBox(
+                          height: 40,
+                          width: 250,
+                          child: TextButton(
+                            child: Text(
+                              'Create recipe',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            style: TextButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              foregroundColor: Colors.white,
+                              backgroundColor: Colors.redAccent,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(30))),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => CreateRecipe()),
+                              );
+                            },
+                          ));
+                  } else {
+                    return Container();
+                  }
+
+                }
+              ),
               SizedBox(height: 20,),
             ],
           );
