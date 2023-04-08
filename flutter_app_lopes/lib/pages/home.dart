@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_lopes/pages/profile.dart';
 import 'package:flutter_app_lopes/pages/recipe.dart';
+import 'package:flutter_app_lopes/pages/recipeDetails.dart';
 
 import '../class/recipe.dart';
 import '../widgets/navigation_drawer.dart';
@@ -29,7 +30,7 @@ class _HomePageState extends State<HomePage> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => RecipePage(recipe: recipe)),
+          MaterialPageRoute(builder: (context) => RecipeDetails(recipe: recipe)),
         );
       },
       child: Card(

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../class/recipe.dart';
+import '../pages/RecipeDetails.dart';
 
 
 List<Widget> recipeSearchfromList(List<QueryDocumentSnapshot<Recipe>> ?recipes, String search) {
@@ -10,7 +11,7 @@ List<Widget> recipeSearchfromList(List<QueryDocumentSnapshot<Recipe>> ?recipes, 
   recipes?.forEach((element) {
     final Recipe recipe = element.data();
     if (recipe.name.contains(search)) {
-      list.add(RecipeSearchItemWidget(onClicked: () async {}, image: 'https://images.squarespace-cdn.com/content/v1/57879a6cbebafb879f256735/1579721909133-R2KSZ8VGDGBI90DYATBK/header4.jpg', name: recipe.name, author: recipe.name, note: 5, recipe: recipe,));
+      list.add(RecipeSearchItemWidget(onClicked: () async {}, image: recipe.image, name: recipe.name, author: recipe.name, note: 5, recipe: recipe,));
     }
   });
 
@@ -97,10 +98,10 @@ class RecipeSearchItemWidget extends StatelessWidget {
               height: 128,
               fit: BoxFit.cover,
               child: InkWell(onTap: () {
-                /*Navigator.push(
+                Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => RecipeDetails(recipe: recipe)),
-                );*/
+                );
               }),
             ),
           ),
