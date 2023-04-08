@@ -4,8 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_lopes/pages/createRecipe.dart';
 import 'package:flutter_app_lopes/pages/recipe.dart';
+import 'package:flutter_app_lopes/pages/uploadImage.dart';
 
 import '../class/recipe.dart';
+import '../fonction/uploadImage.dart';
 
 extension StringCasingExtension on String {
   String toCapitalized() => length > 0 ?'${this[0].toUpperCase()}${substring(1).toLowerCase()}':'';
@@ -128,7 +130,7 @@ class _ProfilePageState extends State<ProfilePage> {
             children: [
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(40, 0, 0, 0),
-                child: ProfilePicture(_firebaseAuth.currentUser!.email),
+                child: ProfilePicture(_firebaseAuth.currentUser!.email, context, _firebaseAuth.currentUser!.uid),
               ),
              // InformationProfile(context),
               SizedBox(height: 20),
@@ -184,24 +186,35 @@ class _ProfilePageState extends State<ProfilePage> {
   );
 }
 
-Row ProfilePicture(String? name) {
+Row ProfilePicture(String? name, BuildContext context, String? uic) {
   return Row(
     mainAxisSize: MainAxisSize.max,
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
-      CircleAvatar(
-        radius: 30,
-        backgroundColor: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.all(1), // Border radius
-          child: InkWell(
-            borderRadius: BorderRadius.circular(15),
-            onTap: () {},
-            child: ClipOval(
-                child: Image.network(
-                    'https://media.licdn.com/dms/image/C5603AQFxIX8VwOWAIQ/profile-displayphoto-shrink_800_800/0/1554474920022?e=2147483647&v=beta&t=ONX58uRfw7aX4VuTgPda2pn2Y8YKa0tPTIY_3aN1Yrg')),
-          ),
-        ),
+      StreamBuilder<String?>(
+        stream: ProfilePictureStream().stream,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return GestureDetector(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePictureUploader(userId: uic!)),
+              ),
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(snapshot.data!),
+                radius: 30.0,
+              ),
+            );
+          } else {
+            return GestureDetector(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              ),
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
       Padding(
         padding: EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),

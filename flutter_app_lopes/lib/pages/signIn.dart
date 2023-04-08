@@ -27,7 +27,8 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("SignIn"),
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
       ),
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
@@ -62,7 +63,7 @@ class _SignInState extends State<SignIn> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
-                          "Sign In",
+                          "Cooker Lopes",
                           style: TextStyle(
                             fontSize: 38,
                             fontWeight: FontWeight.bold,
@@ -79,10 +80,12 @@ class _SignInState extends State<SignIn> {
                                 TextFormField(
                                   keyboardType: TextInputType.emailAddress,
                                   controller: _emailController,
-                                  decoration: const InputDecoration(
-                                    hintText: "Email",
-                                    border: OutlineInputBorder(),
-                                  ),
+                                  decoration: InputDecoration(
+                                labelText: "Email",
+                                hintText: "Email",
+                                border: OutlineInputBorder(
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(25.0)))),
                                   autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
                                   validator: (value) {
@@ -98,10 +101,12 @@ class _SignInState extends State<SignIn> {
                                 TextFormField(
                                   keyboardType: TextInputType.text,
                                   controller: _passwordController,
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
+                                    labelText: "Password",
                                     hintText: "Password",
-                                    border: OutlineInputBorder(),
-                                  ),
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                        BorderRadius.all(Radius.circular(25.0)))),
                                   autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
                                   validator: (value) {
@@ -117,6 +122,15 @@ class _SignInState extends State<SignIn> {
                                   width:
                                   MediaQuery.of(context).size.width * 0.7,
                                   child: ElevatedButton(
+                                      style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all(Colors.red),
+                                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                              RoundedRectangleBorder(
+                                                  borderRadius: BorderRadius.circular(18.0),
+                                                  side: BorderSide(color: Colors.red)
+                                              )
+                                          )
+                                      ),
                                     onPressed: () {
                                       _authenticateWithEmailAndPassword(
                                           context);
