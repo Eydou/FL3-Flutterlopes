@@ -12,19 +12,19 @@ Firebase should be ready to use.
 ## Code architecture
 
 The code is divided in 4 main categories:
-    - bloc: BloC global state manager used for authentication
-    - class: Main data structures used in the project
-    - pages: Contains all flutter pages
-    - widgets: Different generic or specific widget used in the project
+  - bloc: BloC global state manager used for authentication
+  - class: Main data structures used in the project
+  - pages: Contains all flutter pages
+  - widgets: Different generic or specific widget used in the project
 
 ## External librairies
 
 The project currently uses the following external dependencies:
-    - cupertino_icons: Asset repo for icons.
-    - flutter_bloc: Integrates blocs and cubits into Flutter.
-    - firebase_core, firebase_auth, firebase_database, cloud_firestore, firebase_storage: Firebase librairies used for authentication and data management.
-    - equatable: overrides the == and hasCode methods.
-    - google_sign_in: Google authentication
-    - email_validator: Validates email for auth
-    - image_picker: Pick images and camera management
-    - material_floating_search_bar: Search bar
+  - cupertino_icons: Asset repo for icons.
+  - flutter_bloc: Integrates blocs and cubits into Flutter.
+  - firebase_core, firebase_auth, firebase_database, cloud_firestore, firebase_storage: Firebase librairies used for authentication and data management.
+  - equatable: overrides the == and hasCode methods.
+  - google_sign_in: Google authentication
+  - email_validator: Validates email for auth
+  - image_picker: Pick images and camera management
+  - material_floating_search_bar: Search bar
