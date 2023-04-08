@@ -71,7 +71,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ],
                     ),
-                    /*Align(
+                    Align(
                         alignment: Alignment.centerRight,
                       child:  Padding(padding: EdgeInsets.all(10),
                       child: SizedBox(
@@ -100,7 +100,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             });
                           },
                         )
-                    )))*/
+                    )))
                   ],
                 ),
               ],
@@ -137,7 +137,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Expanded(
                 child: GridView.count(
                     crossAxisCount: 2,
-                    childAspectRatio: 3/4,
+                    childAspectRatio: 3/5,
                     scrollDirection: Axis.vertical,
                     physics: PageScrollPhysics(),
                     shrinkWrap: true,

@@ -35,12 +35,18 @@ class RecipeDetails extends StatelessWidget {
                 StreamBuilder<AppUser.User?>(
                     stream: AppUser.UserStream().stream,
                     builder: (context, snapshot) {
-                      return Container(
-                        child: Padding(padding:
-                        const EdgeInsets.fromLTRB(30, 0, 0, 0),
-                            child: RecipeAuthor(image: snapshot.data!.picture, name: snapshot.data!.username, note: 5)
-                        ),
-                      );
+                      if (snapshot.hasData) {
+                        return Container(
+                          child: Padding(padding:
+                          const EdgeInsets.fromLTRB(30, 0, 0, 0),
+                              child: RecipeAuthor(image: snapshot.data!.picture,
+                                  name: snapshot.data!.username,
+                                  note: 5)
+                          ),
+                        );
+                      } else {
+                        return Container();
+                      }
                     }),
                 const Padding(padding:
                 EdgeInsets.fromLTRB(0, 5, 0, 0),
