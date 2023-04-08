@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import '../class/recipe.dart';
 
-import '../widgets/recipeAuthorWidgets.dart';
-import '../widgets/recipeDetailsWidget.dart';
-import '../widgets/recipeIngredientWidget.dart';
 
 class RecipeStepsPage extends StatelessWidget {
   final Recipe recipe;

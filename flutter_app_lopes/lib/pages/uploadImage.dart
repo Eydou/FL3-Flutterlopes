@@ -17,7 +17,6 @@ class ProfilePictureUploader extends StatefulWidget {
 
 class _ProfilePictureUploaderState extends State<ProfilePictureUploader> {
   File? _image;
-  String? _imageUrl;
 
   Future<String?> getProfilePictureUrl() async {
     final user = FirebaseAuth.instance.currentUser;
@@ -30,7 +29,6 @@ class _ProfilePictureUploaderState extends State<ProfilePictureUploader> {
 
     try {
       final downloadUrl = await ref.getDownloadURL();
-      _imageUrl = downloadUrl;
       setState(() {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text('Image uploaded')));

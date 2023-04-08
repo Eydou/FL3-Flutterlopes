@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_app_lopes/bloc/UserRepo.dart';
 import 'package:flutter_app_lopes/bloc/authBloc.dart';
 import 'package:flutter_app_lopes/pages/signIn.dart';

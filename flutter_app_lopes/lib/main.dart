@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_lopes/pages/signIn.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app_lopes/pages/auth.dart';
 import 'package:flutter_app_lopes/bloc/UserRepo.dart';
 import 'firebase_options.dart';
 import 'bloc/authBloc.dart';

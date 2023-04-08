@@ -1,7 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_lopes/bloc/authBloc.dart';
-import 'package:flutter_app_lopes/pages/home.dart';
 import 'package:flutter_app_lopes/pages/profile.dart';
 import 'package:flutter_app_lopes/pages/search.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

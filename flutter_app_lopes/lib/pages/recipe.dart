@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_lopes/class/recipe.dart';
 
-import '../class/recipe.dart';
 
 class RecipePage extends StatefulWidget {
   final Recipe recipe;

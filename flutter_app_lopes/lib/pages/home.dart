@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_lopes/pages/profile.dart';
-import 'package:flutter_app_lopes/pages/recipe.dart';
 import 'package:flutter_app_lopes/pages/recipeDetails.dart';
 
 import '../class/recipe.dart';
@@ -20,7 +19,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   TextEditingController editingController = TextEditingController();
-  String? _imageUrl;
 
   Stream<List<Recipe>> readRecipes() => FirebaseFirestore.instance
       .collection("recipes")
@@ -45,7 +43,6 @@ class _HomePageState extends State<HomePage> {
 
     try {
       final downloadUrl = await ref.getDownloadURL();
-      _imageUrl = downloadUrl;
       setState(() {});
       return downloadUrl;
     } catch (e) {

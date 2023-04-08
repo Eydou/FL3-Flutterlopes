@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../class/recipe.dart';
 
@@ -206,7 +205,7 @@ class _CreateRecipeState extends State<CreateRecipe> {
                   referenceDirImages.child(uniqueFileName);
 
                   try {
-                    await referenceImageToUpload.putFile(File(file!.path));
+                    await referenceImageToUpload.putFile(File(file.path));
                     imageUrl = await referenceImageToUpload.getDownloadURL();
                     setState(() {
                       ScaffoldMessenger.of(context)

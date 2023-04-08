@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../class/recipe.dart';
-import '../pages/RecipeDetails.dart';
-import './recipeDetailsWidget.dart';
-
 class RecipeAuthor extends StatelessWidget {
   final String image;
   final String name;
