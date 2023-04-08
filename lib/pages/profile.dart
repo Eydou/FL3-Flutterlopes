@@ -71,7 +71,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ],
                     ),
-                    Align(
+                    /*Align(
                         alignment: Alignment.centerRight,
                       child:  Padding(padding: EdgeInsets.all(10),
                       child: SizedBox(
@@ -100,7 +100,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             });
                           },
                         )
-                    )))
+                    )))*/
                   ],
                 ),
               ],
