@@ -4,9 +4,9 @@ This project is about cooking. You can register to the application whith Google 
 
 ## Deploy locally
 
-In order to build locally the project. You must have a corresponding [Firebase project](https://console.firebase.google.com/u/0/)
-Then you must install the [Firebase CLI](https://firebase.google.com/docs/cli?hl=fr#setup_update_cli)
-Next you should open your favorite shell to locally configure firebase to use you registered project: `flutterfire configure`. This command will setup the supported platforms.
+In order to build locally the project. You must have a corresponding [Firebase project](https://console.firebase.google.com/u/0/)\
+Then you must install the [Firebase CLI](https://firebase.google.com/docs/cli?hl=fr#setup_update_cli)\
+Next you should open your favorite shell to locally configure firebase to use you registered project: `flutterfire configure`. This command will setup the supported platforms.\
 Firebase should be ready to use.
 
 ## Code architecture
