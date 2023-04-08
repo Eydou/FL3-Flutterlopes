@@ -19,6 +19,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   TextEditingController editingController = TextEditingController();
+  double turns = 0;
 
   Stream<List<Recipe>> readRecipes() => FirebaseFirestore.instance
       .collection("recipes")
@@ -123,34 +124,43 @@ class _HomePageState extends State<HomePage> {
           actions: [
             Padding(
               padding: EdgeInsets.only(right: 15.0, top: 10),
-              child: CircleAvatar(
-                backgroundColor: Colors.white,
-                child: StreamBuilder<String?>(
-                  stream: ProfilePictureStream().stream,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return GestureDetector(
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ProfilePage()),
-                        ),
-                        child: CircleAvatar(
-                          backgroundImage: NetworkImage(snapshot.data!),
-                          radius: 80.0,
-                        ),
-                      );
-                    } else {
-                      return GestureDetector(
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ProfilePage()),
-                        ),
-                        child: CircularProgressIndicator()
-                      );
-                    }
-                  },
+              child: AnimatedRotation(
+                duration: const Duration(seconds: 1),
+                turns: turns,
+                child: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: StreamBuilder<String?>(
+                    stream: ProfilePictureStream().stream,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return GestureDetector(
+                          onDoubleTap: () {
+                            setState(() {
+                              turns += 1 / 4;
+                            });
+                          },
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ProfilePage()),
+                          ),
+                          child: CircleAvatar(
+                            backgroundImage: NetworkImage(snapshot.data!),
+                            radius: 80.0,
+                          ),
+                        );
+                      } else {
+                        return GestureDetector(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => ProfilePage()),
+                            ),
+                            child: CircularProgressIndicator()
+                        );
+                      }
+                    },
+                  ),
                 ),
-              ),
+              )
             )
           ],
         ),
@@ -164,19 +174,6 @@ class _HomePageState extends State<HomePage> {
                 return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: TextField(
-                          controller: editingController,
-                          decoration: InputDecoration(
-                              labelText: "Search",
-                              hintText: "Search",
-                              prefixIcon: Icon(Icons.search),
-                              border: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(25.0)))),
-                        ),
-                      ),
                       Text(
                         "",
                         style:

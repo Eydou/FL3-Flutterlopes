@@ -152,17 +152,6 @@ class _SignInState extends State<SignIn> {
                             width: 30,
                           ),
                         ),
-                        const Text("Don't have an account?"),
-                        OutlinedButton(
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Text("yo")),
-                            );
-                          },
-                          child: const Text("Sign Up"),
-                        )
                       ],
                     ),
                   ),
