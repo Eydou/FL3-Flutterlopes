@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_lopes/class/user.dart' as AppUser;
+import 'package:flutter_app_lopes/pages/RecipeDetails.dart';
 import 'package:flutter_app_lopes/pages/createRecipe.dart';
-import 'package:flutter_app_lopes/pages/recipe.dart';
 import 'package:flutter_app_lopes/pages/uploadImage.dart';
 
 import '../class/recipe.dart';
@@ -28,7 +28,7 @@ class _ProfilePageState extends State<ProfilePage> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => RecipePage(recipe: recipe)),
+              MaterialPageRoute(builder: (context) => RecipeDetails(recipe: recipe)),
             );
           },
           child: Card(

@@ -4,11 +4,12 @@ import '../class/recipe.dart';
 
 class RecipeStepsPage extends StatelessWidget {
   final Recipe recipe;
+  int index = 0;
   RecipeStepsPage({Key? key, required this.recipe}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    int index = 0;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -55,6 +56,7 @@ class RecipeStepsPage extends StatelessWidget {
             ),
             index < recipe.steps.length ? ElevatedButton(
               onPressed: () {
+                print(index);
                 index += 1;
                 (context as Element).markNeedsBuild();
               },

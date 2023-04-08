@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../class/recipe.dart';
+import 'package:flutter_app_lopes/class/user.dart' as AppUser;
 
 import '../class/user.dart';
 import '../widgets/recipeAuthorWidgets.dart';
@@ -31,12 +32,16 @@ class RecipeDetails extends StatelessWidget {
                       child: Image.network(recipe.image, width: 300, height: MediaQuery.of(context).size.width < 500 ? 150 : 300, fit: BoxFit.cover)
                   ),
                 ),
-                Container(
-                  child: Padding(padding:
-                  const EdgeInsets.fromLTRB(30, 0, 0, 0),
-                      child: RecipeAuthor(image: "", name: recipe.userId!, note: 5)
-                  ),
-                ),
+                StreamBuilder<AppUser.User?>(
+                    stream: AppUser.UserStream().stream,
+                    builder: (context, snapshot) {
+                      return Container(
+                        child: Padding(padding:
+                        const EdgeInsets.fromLTRB(30, 0, 0, 0),
+                            child: RecipeAuthor(image: snapshot.data!.picture, name: snapshot.data!.username, note: 5)
+                        ),
+                      );
+                    }),
                 const Padding(padding:
                 EdgeInsets.fromLTRB(0, 5, 0, 0),
                   child: RecipeDetailsHeader(isServe: true, value: 2, unit: "p",),
